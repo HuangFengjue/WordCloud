@@ -33,26 +33,58 @@ pip install numpy matplotlib pillow wordcloud imageio jieba snownlp itchat -i ht
 - mask 指定词云形状图片，默认为矩形
 
   通过以下代码读入外部词云形状图片（需要先`pip install imageio`安装imageio）
+  
+```python
+w = wordcloud.WordCloud(      
+    width=400,
+    height=200,
+    background_color='black',
+    font_path=None, 
+    font_step=1,
+    min_font_size=4,
+    max_font_size=None,
+    max_words=200,
+    stopwords={},
+    scale=1,
+    prefer_horizontal=0.9,
+    relative_scaling=0.5,
+    mask=None) 
+```
+  
 
 # 词云绘制
 **Num.1**
 ```powershell
 # 导入词云制作第三方库wordcloud
 import wordcloud
+
 # 创建词云对象，赋值给w，现在w就表示了一个词云对象
 w = wordcloud.WordCloud()
+
 # 调用词云对象的generate方法，将文本传入
 w.generate('How delightful it is to have friends coming from afar. Welcome to my knowledge planet.')
-将生成的词云保存为output1.png图片文件，保存出到当前文件夹中
+
+#将生成的词云保存为output1.png图片文件，保存出到当前文件夹中
 w.to_file('output1.png')
 ```
-![3号词云：乡村振兴战略中央文件](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output1.png)
+![Output1](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output1.png)
 
+需要注意的是，wordcloud库会非常智能地按空格进行分词及词频统计，出现次数多的词就大。如果输入的是“欢迎大家来到我的首页。”这样完整的句子就无法被绘制成词云，需要用到之后会讲到的jieba库。
 
 **Num.2**
 ```powershell
 import wordcloud
+
 w = wordcloud.WordCloud(width = 1000, height = 700, background_color = 'white', font_path='msyh.ttc')
+
 w.generate('从明天起，做一个幸福的人。喂马、劈柴，周游世界。从明天起，关心粮食和蔬菜。我有一所房子，面朝大海，春暖花开')
+
 w.to_file('output2.png')
+```
+![Output1](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output2.png)
+
+
+**Num.3**
+```python
+
 ```
