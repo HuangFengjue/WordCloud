@@ -1,5 +1,5 @@
 # 第三方库安装
-```powershell
+```python
 pip install numpy matplotlib pillow wordcloud imageio jieba snownlp itchat -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 # 常用参数
@@ -54,7 +54,7 @@ w = wordcloud.WordCloud(
 
 # 词云绘制
 **Num.1**
-```powershell
+```python
 # 导入词云制作第三方库wordcloud
 import wordcloud
 
@@ -72,7 +72,7 @@ w.to_file('output1.png')
 需要注意的是，wordcloud库会非常智能地按空格进行分词及词频统计，出现次数多的词就大。如果输入的是“欢迎大家来到我的首页。”这样完整的句子就无法被绘制成词云，需要用到之后会讲到的jieba库。
 
 **Num.2**
-```powershell
+```python
 import wordcloud
 
 w = wordcloud.WordCloud(width = 1000, height = 700, background_color = 'white', font_path='msyh.ttc')
@@ -81,10 +81,56 @@ w.generate('从明天起，做一个幸福的人。喂马、劈柴，周游世�
 
 w.to_file('output2.png')
 ```
-![Output1](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output2.png)
+![Output2](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output2.png)
 
 
 **Num.3**
 ```python
+import wordcloud
+
+# 从外部.txt文件中读取大段文本，存入变量txt中
+f = open('关于实施乡村振兴战略的意见.txt',encoding='utf-8')
+txt = f.read()
+
+# 构建词云对象w，设置词云图片宽、高、字体、背景颜色等参数
+w = wordcloud.WordCloud(width=1000,
+                        height=700,
+                        background_color='white',
+                        font_path='msyh.ttc')
+
+# 将txt变量传入w的generate()方法，给词云输入文字
+w.generate(txt)
+
+# 将词云图片导出到当前文件夹
+w.to_file('output3.png')
+```
+![Output3](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output3.png)
+
+**Num.4**
+**中文分词**
+还是使用同样的“关于实施乡村振兴战略的意见”文件。
+```python
+import wordcloud
+import jieba
+
+# 从外部.txt文件中读取大段文本，存入变量txt中
+f = open('关于实施乡村振兴战略的意见.txt',encoding='utf-8')
+txt = f.read()
+txtlist = jieba.lcut(txt)
+string = ' '.join(txtlist)
+
+# 构建词云对象w，设置词云图片宽、高、字体、背景颜色等参数
+w = wordcloud.WordCloud(width=1000,
+                        height=700,
+                        background_color='white',
+                        font_path='msyh.ttc',
+                        stopwords = {'和','的'})
+
+# 将txt变量传入w的generate()方法，给词云输入文字
+w.generate(string)
+
+# 将词云图片导出到当前文件夹
+w.to_file('output4.png')
 
 ```
+![Output4](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output4.png)
