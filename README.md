@@ -46,7 +46,7 @@ w.generate('How delightful it is to have friends coming from afar. Welcome to my
 将生成的词云保存为output1.png图片文件，保存出到当前文件夹中
 w.to_file('output1.png')
 ```
-
+![Output1](https://raw.githubusercontent.com/HuangFengjue/mdimages/main/output1.png)
 
 
 **Num.2**
